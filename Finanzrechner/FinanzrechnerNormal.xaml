@@ -1,0 +1,76 @@
+﻿<Window x:Class="Finanzrechner.FinanzRechnerNormal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Finanzrechner"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Finanzrechner ohne Binding" Height="450" Width="800" Background="SlateBlue">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <system:String x:Key="Kreditsumme">Kreditsumme</system:String>
+        <system:String x:Key="Zinssatz">Zinssatz</system:String>
+        <system:String x:Key="Laufzeit">Laufzeit</system:String>
+    </Window.Resources>
+    <Grid Margin="40, 0, 40, 0">
+        <StackPanel>
+            <Label HorizontalAlignment="Center"
+                   Content="{StaticResource Kreditsumme}"></Label>
+            <Slider x:Name="sldKredit"
+                    Maximum="50000" 
+                    Minimum="1000"
+                    ValueChanged="Kreditsumme_Changed" 
+                    TickFrequency="1000"
+                    IsSnapToTickEnabled="True"></Slider>
+            <Label HorizontalAlignment="Center"
+                   Content="{StaticResource Zinssatz}"></Label>
+            <Slider x:Name="sldZins"
+                    Maximum="10" 
+                    Minimum="1" 
+                    ValueChanged="Zinzsatz_Changed" 
+                    TickFrequency="0.1"
+                    IsSnapToTickEnabled="True"></Slider>
+            <Label HorizontalAlignment="Center"
+                   Content="{StaticResource Laufzeit}"></Label>
+            <Slider x:Name="sldLaufzeit"
+                    Maximum="120" 
+                    Minimum="10" 
+                    ValueChanged="Laufzeit_Changed" 
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"></Slider>
+
+            <Label>Daten</Label>
+            <ListBox FontSize="14" Foreground="Black" Background="White">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type Run}">
+                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBoxItem Content="" x:Name="lblKredit" ContentStringFormat='Rate: {0:N2}'/>
+                <ListBoxItem Content="" x:Name="lblZinssatz" ContentStringFormat='Zinssatz: {0:N2}'/>
+                <ListBoxItem Content="" x:Name="lblLaufzeit" ContentStringFormat='Laufzeit: {0:N2}'/>
+                <ListBoxItem>
+                    <TextBlock>
+                       <Run>Rate: </Run>
+                       <Run Name="rRate">0</Run>
+                        <!--Numerische Formatierung durch Code Behind-->
+                    </TextBlock>
+                </ListBoxItem>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
